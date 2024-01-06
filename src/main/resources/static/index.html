@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ <style type="text/css">
+	html{
+		margin-left: 5%;
+		margin-right: 50%;
+	} 
+	h1{
+		text-align: center;
+	} 
+	 
+ </style>
+
+</head>
+
+<body>
+<h1>Cadastro de Alunos José Figueiredo Barreto</h1>
+
+  <form action="" id="formCadastro">
+	<div class="mb-3">
+    <label for="id" class="form-label">ID</label>
+     <input type="text" class="form-control" id="id" readonly>
+    </div>
+	
+	<div class="mb-3">
+  <label for="nome" class="form-label">Nome</label>
+  <input type="text" class="form-control" id="nome" placeholder="Digite o nome do aluno">
+  </div>
+	<div class="mb-3">
+     <label for="cpf" class="form-label">Cpf</label>
+     <input type="text" class="form-control" id="cpf" placeholder="Digite o cpf do aluno">
+    </div>
+	<div class="mb-3">
+     <label for="telefone" class="form-label">Telefone</label>
+      <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone do aluno">
+      </div>
+       <div class="mb-3">
+     <label for="endereco" class="form-label">Endereço</label>
+      <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço do aluno">
+      </div>
+      
+       <div class="mb-3">
+     <label for="matricula" class="form-label">Matricula</label>
+      <input type="text" class="form-control" id="matricula" placeholder="Digite o numero da matricula do aluno">
+      </div>
+      
+       <div class="mb-3">
+       <label for="dataMat" class="form-label">Data da Matrícula</label>
+        <input type="date" class="form-control" id="dataMat" placeholder="Digite a data da matrícula">
+       </div>
+      
+      <div class="mb-3">
+       <label for="anoEscolaridade" class="form-label">Escolaridade</label>
+        <input type="text" class="form-control" id="anoEscolaridade" placeholder="Ex: primeiro ano,etc">
+       </div>
+	  <div class="mb-3">
+       <label for="curso" class="form-label">Curso</label>
+        <input type="text" class="form-control" id="curso" placeholder="Digite o curso do aluno">
+       </div>
+	     <div class="mb-3">
+        <label for="turma" class="form-label">Turma</label>
+        <input type="text" class="form-control" id="turma" placeholder="Digite a turma do aluno">
+	     </div>
+        <div class="mb-3">			
+          <label for="turno" class="form-label">Turno</label>
+           <input type="text" class="form-control" id="turno" placeholder="Digite o turno do aluno">
+      </div>
+        
+        
+      </div>
+  </form>
+    <button type="button" class="btn btn-primary" onclick="salvarUsuario();">Salvar</button>
+     <button type="button" class="btn btn-secondary" onclick="document.getElementById('formCadastro').reset();">Limpar</button>
+     <button type="button" class="btn btn-success"data-bs-toggle="modal"data-bs-target="#modalPesquisarCliente">Pesquisar</button>
+     <button type="button" class="btn btn-warning"on onclick="deletarInicio()">Excluir</button>
+     
+     <div class="modal fade" id="modalPesquisarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Pesquisar Aluno</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nameBusca" class="col-form-label">Nome:</label>
+            <input type="text" class="form-control" id="nameBusca">
+          </div>
+          
+        </form>
+     <div style=" height: 300px; overflow:scroll">
+        <table class="table" id="tabelaResultados">
+  <thead>
+    <tr>  
+	  <th scope="col">ID</th>    
+      <th scope="col">Nome</th>
+      <th scope="col">Telefone</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  
+  </tbody>
+</table>
+ </div>     
+ </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" onclick="pesquisarCliente()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</div>
+     
+     
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+	  
+	  function deletarInicio(){
+		  if(id != null && id.trim()!= ''){
+		 var id = $('#id').val();
+		  excluirCliente(id)
+		  document.getElementById('formCadastro').reset();
+		  }
+	  }
+	  
+	  
+	  
+	  function excluirCliente(id){
+		  
+		if(confirm('Deseja realmente excluir o aluno ?')){  
+	  $.ajax({
+		  
+			  method:"DELETE",
+			  url:"delete",
+			  data: "idalunos=" + id,
+			  success:function(response){
+				 $('#' + id).remove(); 
+				alert(response);
+		        
+		      
+			  }
+		  }).fail(function(xhr,status,errorThrown){
+			  alert("Erro ao excluir aluno: " + xhr.responseText);
+		  });  
+	 
+	    }
+	 
+	  }  
+	      
+	  
+	  
+	  function verEditar(id){
+		  
+		  $.ajax({
+			  method:"GET",
+			  url:"buscaralunoid",
+			  data: "idalunos=" + id,
+			  success:function(response){
+				$("#id").val(response.id);
+		        $("#nome").val(response.nome);
+		        $("#cpf").val(response.cpf);
+		        $("#telefone").val(response.telefone);
+		        $("#endereco").val(response.endereco);
+		        $("#matricula").val(response.matricula);		  
+		        $("#dataMat").val(response.dataMat);
+		        $("#anoEscolaridade").val(response.anoEscolaridade);
+		        $("#curso").val(response.curso);
+		        $("#turma").val(response.turma);
+		        $("#turno").val(response.turno);
+		        
+		        $('#modalPesquisarCliente').modal('hide')
+			  }
+		  }).fail(function(xhr,status,errorThrown){
+			  alert("Erro ao buscar aluno: " + xhr.responseText);
+		  });  
+			  
+		  
+		  
+		  
+	  }
+	  
+	  
+	  function pesquisarCliente(){
+		  
+		  var nome = $('#nameBusca').val();		  
+		  if(nome != null && nome.trim() != '') {
+			  
+			 $.ajax({
+			  method:"GET",
+			  url:"buscarPorNome",
+			  data: "name=" + nome,
+			  success:function(response){
+				$('#tabelaResultados > tbody > tr').remove();  
+				for(var i = 0; i < response.length; i++){
+				$('#tabelaResultados > tbody').append('<tr id="'+response[i].id+'"><td>'+response[i].id+'</td><td>'+response[i].nome+'</td><td>'+response[i].telefone+'</td><td>'+response[i].cpf+'</td><td><button type="button" class="btn btn-dark" onclick="verEditar('+response[i].id+')">Mais</button></td><td><button type="button" class="btn btn-danger" onclick="excluirCliente('+response[i].id+')">Excluir</button></td></tr>')  
+				} 
+			  }
+		  }).fail(function(xhr,status,errorThrown){
+			  alert("Erro ao buscar cliente: " + xhr.responseText);
+		  });  
+			  
+			  
+		  }
+	  }
+	  
+	  
+	  function salvarUsuario(){
+		  var id = $("#id").val();
+		  var nome = $("#nome").val();
+		  var cpf = $("#cpf").val();
+		  var telefone = $("#telefone").val();
+		  var endereco = $("#endereco").val();
+		  var matricula = $("#matricula").val();		  
+		  var dataMat = $("#dataMat").val();
+		  var anoEscolaridade = $("#anoEscolaridade").val();
+		  var curso = $("#curso").val();
+		  var turma = $("#turma").val();
+		   var turno = $("#turno").val();
+		 
+
+		 
+		  if(nome == null || nome != null && nome.trim() == ''){
+			
+			alert('informe o nome do aluno')  
+			return;
+		  }
+		  
+		    $("#nome").focus();
+		  if(telefone == null || telefone != null && telefone.trim() == ''){
+			
+			alert('informe o telefone do aluno')  
+			return;
+		  }
+		    $("#telefone").focus();
+		 
+		  if(turma == null || turma != null && turma.trim() == ''){
+			
+			alert('informe a turma do aluno')  
+			return;
+		  }
+		    $("#turma").focus();
+		 
+		 
+		 
+		  
+		  if(turno == null || turno != null && turno.trim() == ''){
+			
+			alert('informe o turno que o aluno estuda')  
+			return;
+		  }
+         
+              $("#turno").focus();
+		 
+		  if(anoEscolaridade == null || anoEscolaridade != null && anoEscolaridade.trim() == ''){
+			
+			alert('informe a escolaridade do aluno')  
+			return;
+		  }
+         
+             $("#anoEscolaridade").focus();
+		 
+		
+
+		  $.ajax({
+			  method:"POST",
+			  url:"salvar",
+			  data: JSON.stringify({id : id, nome : nome, cpf : cpf, telefone : telefone, endereco : endereco, matricula : Number(matricula), dataMat : dataMat, anoEscolaridade : anoEscolaridade,curso: curso,turma : turma,turno : turno}),
+			  contentType: "application/json; charset = utf-8",
+			  success:function(response){
+				  $("#id").val(response.id);
+				  alert("Dados gravados com sucesso!")
+			  }
+		  }).fail(function(xhr,status,errorThrown){
+			  alert("Erro ao salvar dados: " + xhr.responseText);
+		  });
+	  }
+  </script>
+</body>
+</html>
